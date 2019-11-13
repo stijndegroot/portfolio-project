@@ -48,7 +48,7 @@
             <div class="navbar-nav ml-auto">
                 <a class="nav-item nav-link" href="https://www.instagram.com/stijnkariuki/?hl=nl">Instagram</a>
                 <a class="nav-item nav-link" href="{% static 'Curriculum Vitae.doc' %}">Resume</a>
-                <a class="nav-item nav-link" href="{% url 'allblogs' %}">Blog</a>
+                <a class="nav-item nav-link active" href="{% url 'allblogs' %}">Blog</a>
 
             </div>
         </div>
@@ -56,37 +56,22 @@
 </header>
 
 <main role="main">
-
-    <section class="jumbotron text-center">
-        <div class="container">
-            <h1 class="jumbotron-heading">Greetings, I'm Stijn</h1>
-            <p class="lead text-muted">Something short and leading and me bragging about being able to create a simple website.<br/>(I'm having fun though)</p>
-            <p>
-                <a href="mailto:stijn_degroot@hotmail.com" class="btn btn-primary my-2">Email me</a>
-            </p>
-            <img src="{% static 'IMG-20190719-WA0004.jpg' %}" height="420" class="rounded" />
-        </div>
-    </section>
-
-    <div class="album py-5 bg-light">
-        <div class="container">
-
-            <div class="row">
-                {% for job in jobs.all %}
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <img class="card-img-top" src="{{ job.image.url }}"/>
-                        <div class="card-body">
-                            <p class="card-text">{{job.summary}}</p>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
-                </div>
-            </div>
-        </div>
+    <div class="container">
+    <h1 class="text-center pt-3"> Welcome to the blog!</h1>
+    <br/>
+    <br/>
+    <h2>Latest Post</h2>
     </div>
+    <hr/>
 
+    {% for blog in blogs.all %}
+    <a href="{% url 'detail' blog.id %}"><h3>{{blog.title}}</h3></a>
+    <time>{{blog.pub_date_pretty}}</time>
+    <br/>
+    <img class="img-responsive" src="{{blog.image.url}}" height=200 width=200/>
+    <br/>
+    <p>{{blog.summary}}</p>
+    {% endfor %}
 </main>
 
 <footer class="text-muted">
